@@ -1,45 +1,4 @@
-<?php 
-session_start();
-$correcto=0;
-//$suministros=array();
-$consulta="";
-$x=0;
-for($i=0;$i<count($_SESSION['SUMINISTROS']);$i++)
-   				{
-					
-					
-						//array_push($suministros,$_SESSION['SUMINISTROS'][$i]);
-						
-						if ($x==0)
-						{
-							$consulta="id_suministro=".$_SESSION['SUMINISTROS'][$i];
-							}
-						else
-						{
-							$consulta=$consulta." or id_suministro=".$_SESSION['SUMINISTROS'][$i];
-							}
-						
-						$x++;
-						
-						
-					
-    				if ($_SESSION['SUMINISTROS'][$i]==$_GET['id'])
-					{
-						$correcto=1;
-						//array_push($suministros,$_SESSION['SUMINISTROS'][$i]);
-						
-						
-						}
-				
-					
-   				}
-
-if ($correcto==0)
-{
-	header('Location: login.php');
-	}
-
-?>
+﻿
 <!doctype html>
 <html lang="es">
 <head>
