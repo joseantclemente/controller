@@ -13,11 +13,30 @@
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
  	<script type="text/javascript" src="js/js.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
- 
+<script>
+
+	function ides(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+	
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+ var ide=ides('id');
+
+</script>
     <script type="text/javascript">
+
     	setInterval(function() {
 
-			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id=9", function(data, textStatus) {
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus) {
 				document.getElementById('pactiva').innerHTML = data.API;
 				document.getElementById('preactiva').innerHTML = data.IPI;
 				document.getElementById('pcapacitiva').innerHTML = data.CPI;
@@ -63,7 +82,7 @@
                 <div>
                     <div class="fleft infoactiva">
                         <p><span id="pactiva">-</span> kW</p>
-                        <p>Energía Activa</p>
+                        <p>Energía Activaaa</p>
                     </div>
                 </div>
             </li>
