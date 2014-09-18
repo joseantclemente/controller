@@ -31,18 +31,14 @@
     }
 }
  var ide=ides('id');
-if (ide==3)
+
+</script>
+
+<script type="text/javascript">
+function redirigir()
 {
-document.getElementById('suministro').innerHTML = "Benidorm";
-}
-if (ide==9)
-{
-document.getElementById('suministro').innerHTML = "Sevilla";
-}
-if (ide==12)
-{
-document.getElementById('suministro').innerHTML = "Alicante";
-}
+	window.location="index.html?id="+ide;
+	}
 </script>
     <script type="text/javascript">
 
@@ -52,6 +48,7 @@ document.getElementById('suministro').innerHTML = "Alicante";
 				document.getElementById('pactiva').innerHTML = data.API;
 				document.getElementById('preactiva').innerHTML = data.IPI;
 				document.getElementById('pcapacitiva').innerHTML = data.CPI;
+				document.getElementById('suministro').innerHTML = data.Poblacion;
 				
 			});
 
@@ -70,8 +67,8 @@ document.getElementById('suministro').innerHTML = "Alicante";
     	<div>
             <div class="sup">
                 <div class="fleft"><span aria-hidden="true" class="icon-uniE609"></span></div>
-                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">Almería</span></p></div>
-                <div class="fleft"><a href="index.html"><span aria-hidden="true" class="icon-search"></span></a></div>
+                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
+                <div class="fleft"><a href="#" onClick="redirigir();"><span aria-hidden="true" class="icon-search"></span></a></div>
             </div>
             
             <nav id="navegador">

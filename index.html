@@ -36,19 +36,21 @@
     }
 }
  var ide=ides('id');
-if (ide==3)
-{
-document.getElementById('suministro').innerHTML = "Benidorm";
-}
-if (ide==9)
-{
-document.getElementById('suministro').innerHTML = "Sevilla";
-}
-if (ide==12)
-{
-document.getElementById('suministro').innerHTML = "Alicante";
-}
+
 </script>
+
+ <script type="text/javascript">
+
+    	setInterval(function() {
+
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus) {
+
+				document.getElementById('suministro').innerHTML = data.Poblacion;
+				
+			});
+
+		}, 1000);
+	</script>
 </head>
 
 

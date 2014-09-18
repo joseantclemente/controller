@@ -4,4 +4,8 @@
 <file name="icomoon.ttf" server="192.168.5.40:23//" local="130554418383368303" remote="130553458800000000" Dst="2" />
 <file name="icomoon.woff" server="192.168.5.40:23//" local="130554418383528312" remote="130553458800000000" Dst="2" />
 <file name="icomoon.svg" server="192.168.5.40:23//" local="130554418385388419" remote="130553458800000000" Dst="2" />
+<file name="icomoon.eot" server="192.168.5.40:23//app2/" local="130554418381418192" remote="130555129200000000" Dst="2" />
+<file name="icomoon.svg" server="192.168.5.40:23//app2/" local="130554418385388419" remote="130555129200000000" Dst="2" />
+<file name="icomoon.ttf" server="192.168.5.40:23//app2/" local="130554418383368303" remote="130555129200000000" Dst="2" />
+<file name="icomoon.woff" server="192.168.5.40:23//app2/" local="130554418383528312" remote="130555129200000000" Dst="2" />
 </dwsync>
