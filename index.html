@@ -17,7 +17,7 @@
     <script type="text/javascript">
     	setInterval(function() {
 
-			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id=2", function(data, textStatus) {
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id=12", function(data, textStatus) {
 				document.getElementById('pactiva').innerHTML = data.API;
 				document.getElementById('preactiva').innerHTML = data.IPI;
 				document.getElementById('pcapacitiva').innerHTML = data.CPI;
