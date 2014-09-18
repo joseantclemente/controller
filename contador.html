@@ -31,7 +31,18 @@
     }
 }
  var ide=ides('id');
-
+if (ide==3)
+{
+document.getElementById('suministro').innerHTML = "Benidorm";
+}
+if (ide==9)
+{
+document.getElementById('suministro').innerHTML = "Sevilla";
+}
+if (ide==12)
+{
+document.getElementById('suministro').innerHTML = "Alicante";
+}
 </script>
     <script type="text/javascript">
 
@@ -41,6 +52,7 @@
 				document.getElementById('pactiva').innerHTML = data.API;
 				document.getElementById('preactiva').innerHTML = data.IPI;
 				document.getElementById('pcapacitiva').innerHTML = data.CPI;
+				
 			});
 
 		}, 1000);
