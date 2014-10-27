@@ -12,10 +12,13 @@
 <file name="contactprocess.php" server="192.168.5.40:23//app2/" local="130554418365597287" remote="130555129200000000" Dst="2" />
 <file name="email_validation.php" server="192.168.5.40:23//app2/" local="130554418365697293" remote="130555129200000000" Dst="2" />
 <file name="mail2.php" server="192.168.5.40:23//app2/" local="130554418363717179" remote="130555129200000000" Dst="2" />
+<<<<<<< HEAD
 <file name="class.phpmailer.php" server="192.168.5.40:23//app3/" local="130588857096523331" remote="130588825200000000" Dst="1" />
 <file name="class.pop3.php" server="192.168.5.40:23//app3/" local="130588857096553333" remote="130588825200000000" Dst="1" />
 <file name="class.smtp.php" server="192.168.5.40:23//app3/" local="130588857096643338" remote="130588825200000000" Dst="1" />
 <file name="contactprocess.php" server="192.168.5.40:23//app3/" local="130588857096683340" remote="130588825200000000" Dst="1" />
 <file name="mail2.php" server="192.168.5.40:23//app3/" local="130588857096783346" remote="130588825200000000" Dst="1" />
 <file name="email_validation.php" server="192.168.5.40:23//app3/" local="130588857099583506" remote="130588825200000000" Dst="1" />
+=======
+>>>>>>> origin/master
 </dwsync>

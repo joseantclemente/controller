@@ -11,6 +11,7 @@
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
  	<script type="text/javascript" src="js/js.js"></script>
+<<<<<<< HEAD
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
 	<script src="//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
  
@@ -59,6 +60,36 @@
     
     
     <!--cargar primeros datos en TReal-->
+=======
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet"  href="styles/jquerymobile.css" media="screen, print"/>  
+<script>
+
+	function ides(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+	
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+ var ide=ides('id');
+
+</script>
+
+<script type="text/javascript">
+function redirigir(pagina)
+{
+	window.location=pagina+"?id="+ide;
+	}
+</script>
+>>>>>>> origin/master
     <script type="text/javascript">
     	setInterval(function() {
 			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus){
@@ -66,9 +97,13 @@
 				document.getElementById('preactiva').innerHTML = data.IPI;
 				document.getElementById('pcapacitiva').innerHTML = data.CPI;
 				document.getElementById('suministro').innerHTML = data.Poblacion;
+<<<<<<< HEAD
 				document.getElementById('tension1').innerHTML = data.VIBT1Graf;
 				document.getElementById('tension2').innerHTML = data.VIBT2Graf;
 				document.getElementById('tension3').innerHTML = data.VIBT3Graf;
+=======
+				
+>>>>>>> origin/master
 			});
 		}, 1000);
 	</script>
@@ -83,16 +118,28 @@
 	<header class="gen">
     	<div>
             <div class="sup">
+<<<<<<< HEAD
                 <div class="fleft"><a href="index.html">Salir</a></div>
                 <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
                 <div class="fleft"><a href="#" onClick="redirigir('suministros.html');"><span aria-hidden="true" class="icon-search"></span></a></div>
+=======
+                <div class="fleft"><span aria-hidden="true" class="icon-uniE609"></span></div>
+                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
+                <div class="fleft"><a href="#" onClick="redirigir('index.html');"><span aria-hidden="true" class="icon-search"></span></a></div>
+>>>>>>> origin/master
             </div>
             
             <nav id="navegador">
                 <ul>
+<<<<<<< HEAD
                     <li><a href="#" onClick="redirigir('contador.html');"><span aria-hidden="true" class="icon-screen"></span></a></li>
                     <li><a href="#" onClick="redirigir('grafica.html');"><span aria-hidden="true" class="icon-gauge"></span></a></li>
                     <li><a href="#" onClick="redirigir('sucesos.html');"><span aria-hidden="true" class="icon-uniE600"></span></a></li>
+=======
+                    <li><a href="#"><span aria-hidden="true" class="icon-screen"></span></a></li>
+                    <li><a href="#" onClick="redirigir('sucesos.html');"><span aria-hidden="true" class="icon-gauge"></span></a></li>
+                    <li><a href="#"><span aria-hidden="true" class="icon-uniE600"></span></a></li>
+>>>>>>> origin/master
                 </ul>
             </nav>
 		</div>

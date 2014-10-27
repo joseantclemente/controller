@@ -5,6 +5,7 @@
 <file name=".gitattributes" server="192.168.5.40:23//app2/" local="130540406209146362" remote="130555129200000000" Dst="2" />
 <file name="index.html" server="192.168.5.40:23//app2/" local="130555141319036585" remote="130555141200000000" Dst="2" />
 <file name="sucesos.html" server="192.168.5.40:23//app2/" local="130555926181651619" remote="130555926000000000" Dst="2" />
+<<<<<<< HEAD
 <file name="index.html" server="192.168.5.40:23//app/" local="130586061012773417" remote="130555006800000000" Dst="2" />
 <file name="index.html" server="192.168.5.40:23//app3/" local="130588857104013759" remote="130588825200000000" Dst="1" />
 <file name="consumo.html" server="192.168.5.40:23//app3/" local="130586073689458482" remote="130585497000000000" Dst="2" />
@@ -17,4 +18,6 @@
 <file name="login.html" server="192.168.5.40:23//app3/" local="130588857107313948" remote="130588825200000000" Dst="1" />
 <file name="pruebas.html" server="192.168.5.40:23//app3/" local="130588857107593964" remote="130588825200000000" Dst="1" />
 <file name="verificar.php" server="192.168.5.40:23//app3/" local="130588857116584478" remote="130588825200000000" Dst="1" />
+=======
+>>>>>>> origin/master
 </dwsync>
