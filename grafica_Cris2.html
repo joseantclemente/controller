@@ -1,0 +1,247 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+	<title>Controller Energético</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/style.css" media="screen, print"/>
+	<link rel="stylesheet"  href="styles/jquerymobile.css" media="screen, print"/>
+    
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ 	<script type="text/javascript" src="js/js.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
+	<script src="//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>  
+    <script type="text/javascript" src="//www.google.com/jsapi"></script>
+ 
+ 	
+
+
+
+	<!--Funcion para añadir parametro con id despues del enlace-->
+	<script type="text/javascript">
+		function ides(sParam)
+		{
+			var sPageURL = window.location.search.substring(1);
+			var sURLVariables = sPageURL.split('&');
+			
+			for (var i = 0; i < sURLVariables.length; i++) 
+			{
+				var sParameterName = sURLVariables[i].split('=');
+				if (sParameterName[0] == sParam) 
+				{
+					return sParameterName[1];
+				}
+			}
+		}
+		var ide=ides('id');
+		
+    
+		function redirigir(pagina)
+		{
+			window.location=pagina+"?id="+ide;
+		}
+    </script>
+
+<script type="text/javascript">
+    	
+var fecha=new Date();
+var ayer=new Date(fecha.getTime() - 24*60*60*1000);
+parametro=(ayer.getDate()+"-"+(ayer.getMonth()+1)+"-"+ayer.getFullYear());
+
+//var ide=ides('id');
+var activadiaria, reactivadiaria, porcentajediario;
+var activamensual, reactivamensual, porcentajemensual;
+var activaanual, reactivaanual, porcentajeanual;
+
+function ponerdatos()
+{
+	document.getElementById('activadiaria').innerHTML=activadiaria+" kW";
+document.getElementById('reactivadiaria').innerHTML=reactivadiaria+" kW";
+document.getElementById('porcentajediario').innerHTML=porcentajediario+" %";
+
+document.getElementById('activamensual').innerHTML=activamensual+" kW";
+document.getElementById('reactivamensual').innerHTML=reactivamensual+" kW";
+document.getElementById('porcentajemensual').innerHTML=porcentajemensual+" %";
+
+document.getElementById('activasemanal').innerHTML=activasemanal+" kW";
+document.getElementById('reactivasemanal').innerHTML=reactivasemanal+" kW";
+document.getElementById('porcentajesemanal').innerHTML=porcentajesemanal+" %";
+	}
+function cogerDatos()
+{
+	//fechaini='05-04-2014';
+	//fechafin='14-04-2014';
+	//alert('http://192.168.2.41:8080/scada/def/funciones/excesos5.php?id='+ide+'&fechaini='+fechaini+'&fechafin='+fechafin);
+	
+			$.ajax({
+				
+        //url: 'funciones/excesosreactiva.php?id='+ide+'&fechaini='+fechaini+'&fechafin='+fechafin,
+		url:'/funciones/excesosreactivaapp.php?id='+ide+'&fechaini=14-10-2014&fechafin=21-10-2014&fechas='+parametro,
+		async: false,
+		
+        success: function(point) {
+			
+			activadiaria=point.activadiaria;
+			reactivadiaria=point.reactivadiaria;
+porcentajediario=point.porcentajediario;
+
+			activamensual=point.activamensual;
+			reactivamensual=point.reactivamensual;
+porcentajemensual=point.porcentajemensual;
+
+activasemanal=point.activasemanal;
+			reactivasemanal=point.reactivasemanal;
+porcentajesemanal=point.porcentajesemanal;
+					
+			var graficas=point.grafica.split("|");
+			for (i=0;i<graficas.length;i++)
+			{
+				var graficas2=graficas[i].split(",");
+			var valores=[];
+
+				
+				valores.push(new Date(graficas2[0],graficas2[1],graficas2[2],graficas2[3],graficas2[4]));
+				valores.push(parseFloat(graficas2[5]));
+				valores.push(parseFloat(graficas2[6]));
+				
+				
+			
+			graficasbueno.push(valores);
+				}
+
+		}
+		});
+		
+}
+
+
+
+
+	 graficasbueno=[];
+	 cogerDatos();
+	      google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawChart);
+	 function ejecutar()
+{
+	 setActive
+	 ponerdatos();
+
+}
+      function drawChart() {
+
+        var options = {
+          title: null
+        };
+		    var data = new google.visualization.DataTable();
+
+  			data.addColumn('datetime', 'Fecha');
+			data.addColumn('number', 'E. Activa');
+			data.addColumn('number', 'E. Reactiva');
+  
+			//data.addColumn({type:'string', role:'style'});
+
+   // Create random stock values, just like it works in reality.
+   
+   
+
+
+data.addRows(graficasbueno);
+        var chart = new google.visualization.LineChart(document.getElementById('chart'));
+
+        chart.draw(data, options);
+      }
+	  			
+	  
+    </script>
+    
+    
+    <!--cargar primeros datos en TReal-->
+    <script type="text/javascript">
+    	setInterval(function() {
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus){
+				document.getElementById('suministro').innerHTML = data.Poblacion;
+			});
+		}, 1000);
+	</script>
+
+
+</head>
+
+
+
+<body>
+	<header class="gen">
+    	<div>
+            <div class="sup">
+                <div class="fleft"><a href="index.html">Salir</a></div>
+                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
+                <div class="fleft"><a href="#" onClick="redirigir('suministros.html');"><span aria-hidden="true" class="icon-search"></span></a></div>
+            </div>
+            
+            <nav id="navegador">
+                <ul>
+                    <li><a href="#" onClick="redirigir('contador.html');"><span aria-hidden="true" class="icon-screen"></span></a></li>
+                    <li><a href="#" onClick="redirigir('grafica.html');"><span aria-hidden="true" class="icon-gauge"></span></a></li>
+                    <li><a href="#" onClick="redirigir('sucesos.html');"><span aria-hidden="true" class="icon-uniE600"></span></a></li>
+                </ul>
+            </nav>
+		</div>
+	</header>
+    
+    
+    
+	<div class="container">
+  		<h1 class="raleway fleft minmargen">Activa/Reactiva semanal</h1>
+  		<div class="divchart"><div id="chart"></div></div>
+        <h1 class="raleway fleft">Consumo Medio</h1>
+      
+        <div class="tconsumo fleft">
+            
+            	<article class="fleft">
+                	<h2>Activa (kW)</h2>
+                </article>
+                <article class="fleft">
+                	<h2>Reactiva (kVAR)</h2>
+                </article>
+                <article class="fleft">
+                	<h2>Reactiva (%)</h2>
+                </article>
+            
+        </div>
+            
+        
+        <ul class="ulconsumo fleft">
+            <li>
+                <!--<h3>Últimas 24h</h3>-->
+                <h3>Media Horaria Diaria</h3>
+                <div><p id="activadiaria">-</p></div>
+                <div><p id="reactivadiaria">-</p></div>
+                <div><p id="porcentajediario">-</p></div>
+            </li>
+            
+             <li>
+                <!--<h3>Últimas 24h</h3>-->
+                <h3>Media Horaria Semanal</h3>
+                <div><p id="activasemanal">-</p></div>
+                <div><p id="reactivasemanal">-</p></div>
+                <div><p id="porcentajesemanal">-</p></div>
+            </li>
+            
+             <li>
+                <!--<h3>Últimas 24h</h3>-->
+                <h3>Media Horaria Mensual</h3>
+                <div><p id="activamensual">-</p></div>
+                <div><p id="reactivamensual">-</p></div>
+                <div><p id="porcentajemensual">-</p></div>
+            </li>
+            
+        </ul>
+      
+    </div>
+    
+
+    <script>window.onload = ejecutar;</script>
+</body>
+</html>

@@ -13,7 +13,7 @@ function viewport()
 
 
 
-
+/*
 function setActive() {
 
   liObj = document.getElementById('navegador').getElementsByTagName('li');
@@ -24,4 +24,4 @@ function setActive() {
 	  aObj[i].className='active';
     }
   }
-}
+}*/

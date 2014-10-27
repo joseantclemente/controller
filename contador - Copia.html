@@ -1,0 +1,155 @@
+﻿
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Controller Energético</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+	
+	<link rel="stylesheet" type="text/css" href="styles/style.css" media="screen, print"/>
+	
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ 	<script type="text/javascript" src="js/js.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<link rel="stylesheet"  href="styles/jquerymobile.css" media="screen, print"/>  
+<script>
+
+	function ides(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+	
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            return sParameterName[1];
+        }
+    }
+}
+ var ide=ides('id');
+
+</script>
+
+<script type="text/javascript">
+function redirigir()
+{
+	window.location="index.html?id="+ide;
+	}
+</script>
+    <script type="text/javascript">
+
+    	setInterval(function() {
+
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus) {
+				document.getElementById('pactiva').innerHTML = data.API;
+				document.getElementById('preactiva').innerHTML = data.IPI;
+				document.getElementById('pcapacitiva').innerHTML = data.CPI;
+				document.getElementById('suministro').innerHTML = data.Poblacion;
+				
+			});
+
+		}, 1000);
+	</script>
+    
+    
+</head>
+
+
+
+<body>
+    
+    
+	<header class="gen">
+    	<div>
+            <div class="sup">
+                <div class="fleft"><span aria-hidden="true" class="icon-uniE609"></span></div>
+                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
+                <div class="fleft"><a href="#" onClick="redirigir();"><span aria-hidden="true" class="icon-search"></span></a></div>
+            </div>
+            
+            <nav id="navegador">
+                <ul>
+                    <li><a href="#"><span aria-hidden="true" class="icon-screen"></span></a></li>
+                    <li><a href="#"><span aria-hidden="true" class="icon-gauge"></span></a></li>
+                    <li><a href="#"><span aria-hidden="true" class="icon-uniE600"></span></a></li>
+                </ul>
+            </nav>
+		</div>
+   
+	</header>
+    
+    
+    
+    <div class="container">
+    	<h1 class="raleway fleft">Selección de Suministro</h1>
+        
+        <ul class="ultreal fleft">
+            <li>
+                <div>
+                    <div class="fleft infoactiva">
+                        <p><span id="pactiva">-</span> kW</p>
+                        <p>Energía Activaaa</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="fleft inforeactiva">
+                        <p><span id="preactiva">-</span> kVAR</p>
+                        <p>Energía Reactiva</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <div class="fleft infocapacitiva">
+                        <p><span id="pcapacitiva">-</span> kVAR</p>
+                        <p>Energía Capacitiva</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+    
+    
+
+		<!--<article id="indexcontent" class="content bgindex">
+			<section class="textcenter">
+				
+				<article>
+					<section>
+						<article><h4>Potencia Activa</h4></article>
+						<article>
+							<h5 id="pactiva">-</h5>
+							<h4>kW</h4>
+						</article>
+					</section>
+				</article>
+				<article>
+					<section>
+						<article><h4>Potencia Reactiva</h4></article>
+						<article><h5 id="preactiva">-</h5>
+						<h4>kVAR</h4></article>
+					</section>
+				</article>
+				<article>
+					<section>
+						<article><h4>Potencia Capacitiva</h4></article>
+						<article><h5 id="pcapacitiva">-</h5>
+						<h4>kVAR</h4></article>
+					</section>
+				</article>
+			</section>
+		</article>-->
+
+
+	</div> <!--end container content-->
+
+	<script>window.onload = setActive;</script>
+</body>
+</html>

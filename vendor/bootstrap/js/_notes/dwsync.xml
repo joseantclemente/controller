@@ -2,4 +2,8 @@
 <dwsync>
 <file name="bootstrap.js" server="192.168.5.40:23//" local="130554418390008683" remote="130553280000000000" Dst="2" />
 <file name="bootstrap.min.js" server="192.168.5.40:23//" local="130554418390068687" remote="130553280000000000" Dst="2" />
+<file name="bootstrap.js" server="192.168.5.40:23//app2/" local="130554418390008683" remote="130555129200000000" Dst="2" />
+<file name="bootstrap.min.js" server="192.168.5.40:23//app2/" local="130554418390068687" remote="130555129200000000" Dst="2" />
+<file name="bootstrap.js" server="192.168.5.40:23//app3/" local="130588857114094336" remote="130588825200000000" Dst="1" />
+<file name="bootstrap.min.js" server="192.168.5.40:23//app3/" local="130588857114224343" remote="130588825200000000" Dst="1" />
 </dwsync>

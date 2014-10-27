@@ -1,5 +1,4 @@
-
-<!doctype html>
+﻿<!doctype html>
 <html lang="es">
 <head>
 	<title>Controller Energético</title>
@@ -13,25 +12,24 @@
  	<script type="text/javascript" src="js/js.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
 	<script src="//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
- 
- 
- 	<!--Activar el icono activo actualmente-->
+    
+    
+	<!--Activar el icono activo actualmente-->
 	<script> 
 		function setActive() {
 			aObj = document.getElementById('navegador').getElementsByTagName('a');
 			spanObj = document.getElementById('navegador').getElementsByTagName('span');
 			
 			for(i=0;i<aObj.length;i++) {
-				if(i==0) {
+				if(i==2) {
 					spanObj[i].style.color='#3498DB';
 				}
 			}
 		}
     </script>
     
-    
-    
-	<!--Funcion para añadir parametro con id despues del enlace-->
+ 
+ 	<!--Funcion para añadir parametro con id despues del enlace-->
 	<script type="text/javascript">
 		function ides(sParam)
 		{
@@ -62,17 +60,11 @@
     <script type="text/javascript">
     	setInterval(function() {
 			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus){
-				document.getElementById('pactiva').innerHTML = data.API;
-				document.getElementById('preactiva').innerHTML = data.IPI;
-				document.getElementById('pcapacitiva').innerHTML = data.CPI;
 				document.getElementById('suministro').innerHTML = data.Poblacion;
-				document.getElementById('tension1').innerHTML = data.VIBT1Graf;
-				document.getElementById('tension2').innerHTML = data.VIBT2Graf;
-				document.getElementById('tension3').innerHTML = data.VIBT3Graf;
 			});
 		}, 1000);
 	</script>
-        
+    
 </head>
 
 
@@ -81,7 +73,7 @@
     
     
 	<header class="gen">
-    	<div>
+        <div>
             <div class="sup">
                 <div class="fleft"><a href="index.html">Salir</a></div>
                 <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
@@ -101,95 +93,43 @@
     
     
     <div class="container">
-    	<h1 class="raleway fleft">Datos en Tiempo Real</h1>
+    	<h1 class="raleway fleft">Selección de Suministro</h1>
         
-        <ul class="ultreal fleft">
-             <li>
-                <div>
-                    <div class="fleft infoactiva">
-                        <p><span id="pactiva">-</span> kW</p>
-                        <p>Energía Activa</p>
+        <ul class="ulsumin fleft">
+        	<li>
+            	<a href="contador.html?id=2" data-transition="slide">
+                    <div class="fleft infosum">
+                        <p>Novelda</p>
+                        <p>ES 0081 2222 3125 9125 LM</p>
+                        <p>Alarmas (<span>0</span>)</p>
                     </div>
-                </div>
+                    <div class="fright"><span aria-hidden="true" class="icon-arrow-right"></span></div>
+                </a>
             </li>
             <li>
-                <div>
-                    <div class="fleft inforeactiva">
-                        <p><span id="preactiva">-</span> kVAR</p>
-                        <p>Energía Reactiva</p>
+            	<a href="contador.html?id=3" data-transition="slide">
+                    <div class="fleft infosum">
+                        <p>Benidorm</p>
+                        <p>ES 0002 0000 5410 3256 PW</p>
+                        <p class="alarma">Alarmas (<span>2</span>)</p>
                     </div>
-                </div>
+                    <div class="fright"><span aria-hidden="true" class="icon-arrow-right"></span></div>
+                </a>
             </li>
             <li>
-                <div>
-                    <div class="fleft infocapacitiva">
-                        <p><span id="pcapacitiva">-</span> kVAR</p>
-                        <p>Energía Capacitiva</p>
+            	<a href="contador.html?id=4" data-transition="slide">
+                    <div class="fleft infosum">
+                        <p>Socuéllamos</p>
+                        <p>ES 0081 2222 3125 9125 LM</p>
+                        <p >Alarmas (<span>0</span>)</p>
                     </div>
-                </div>
+                    <div class="fright"><span aria-hidden="true" class="icon-arrow-right"></span></div>
+                </a>
             </li>
-            <li>
-                <div>
-                    <div class="fleft infotl">
-                        <p><span id="tension1">-</span> V</p>
-                        <p>Tensión L1</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <div class="fleft infotl">
-                        <p><span id="tension2">-</span> V</p>
-                        <p>Tensión L2</p>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <div class="fleft infotl">
-                        <p><span id="tension3">-</span> V</p>
-                        <p>Tensión L2</p>
-                    </div>
-                </div>
-            </li>
+           
         </ul>
     </div>
     
     
-    
-
-		<!--<article id="indexcontent" class="content bgindex">
-			<section class="textcenter">
-				
-				<article>
-					<section>
-						<article><h4>Potencia Activa</h4></article>
-						<article>
-							<h5 id="pactiva">-</h5>
-							<h4>kW</h4>
-						</article>
-					</section>
-				</article>
-				<article>
-					<section>
-						<article><h4>Potencia Reactiva</h4></article>
-						<article><h5 id="preactiva">-</h5>
-						<h4>kVAR</h4></article>
-					</section>
-				</article>
-				<article>
-					<section>
-						<article><h4>Potencia Capacitiva</h4></article>
-						<article><h5 id="pcapacitiva">-</h5>
-						<h4>kVAR</h4></article>
-					</section>
-				</article>
-			</section>
-		</article>-->
-
-
-	</div> <!--end container content-->
-
-	<script>window.onload = setActive;</script>
 </body>
 </html>

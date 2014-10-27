@@ -1,0 +1,387 @@
+<?php 
+session_start();
+$correcto=0;
+//$suministros=array();
+$consulta="";
+$x=0;
+for($i=0;$i<count($_SESSION['SUMINISTROS']);$i++)
+   				{
+					
+					
+						//array_push($suministros,$_SESSION['SUMINISTROS'][$i]);
+						
+						if ($x==0)
+						{
+							$consulta="id_suministro=".$_SESSION['SUMINISTROS'][$i];
+							}
+						else
+						{
+							$consulta=$consulta." or id_suministro=".$_SESSION['SUMINISTROS'][$i];
+							}
+						
+						$x++;
+						
+						
+					
+    				if ($_SESSION['SUMINISTROS'][$i]==$_GET['id'])
+					{
+						$correcto=1;
+						//array_push($suministros,$_SESSION['SUMINISTROS'][$i]);
+						
+						
+						}
+				
+					
+   				}
+
+if ($correcto==0)
+{
+	header('Location: login2.php');
+	}
+
+?>
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Controller Energético</title>
+
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+	
+	<link rel="stylesheet" type="text/css" href="styles/style.css" media="screen, print"/>
+	<link rel="stylesheet" type="text/css" href="styles/responsive.css" media="screen, print"/>
+	
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<?php require_once('funciones/periodos.php'); ?>
+
+ 	<script type="text/javascript" src="js/js.js"></script>
+ 	<script type="text/javascript" src="funciones/sucesos2.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="funciones/graficos.js"></script>
+	<script src="funciones/graficos2.js"></script>
+
+
+</head>
+
+
+
+<body>
+<?php include_once("/analyticstracking.php") ?>
+	<!--script src="funciones/graficos.js"></script-->
+	<header>
+		<div id="containerheader">
+			<div id="logo">
+				<ul>
+					<li><a href="#"><img src="images/logonucompleto.png" alt="Logotipo"></a></li>
+	           	</ul>
+			</div>
+			<div id="navmenu">
+				<nav>
+					<ul>
+						<?php 
+						include_once("funciones/generales.php");
+						if (get_tarifa($_GET['id'])==1)
+						{
+						include("menus/menu61.php");
+						}
+						if (get_tarifa($_GET['id'])==2)
+						{
+						include("menus/menu31.php");
+						}
+						?>
+					</ul>
+			    </nav>
+			</div>
+		</div>
+	</header>
+
+
+	<div id="containercontent" class="sucesos">
+		<article id="usercontent">
+			<section>
+				<p><span id="hora"></span></p>
+			</section>
+
+			<?php
+                $usuario=$_POST['usuario'];
+$pass=$_POST['contra'];
+$dbname="Tiemporeal";
+$uid="sa";
+$serverName = "192.168.5.40\SQLEXPRESS";
+$pwd="Power%01";
+$constante=0;
+$connectionInfo = array("UID" => $uid, "PWD" => $pwd, "Database"=>"$dbname");
+$conn = sqlsrv_connect( $serverName, $connectionInfo);
+if($conn) {
+	?>
+			<section>
+				<?php
+		   
+				echo "<h1>".utf8_encode($_SESSION['empresa'])."</h1>";
+		
+		
+		?>
+			</section>
+
+<?php
+$sqlsum = "Select * from suministros where ".$consulta;
+
+		$rssum = sqlsrv_query( $conn, $sqlsum);
+
+while( $rowsum = sqlsrv_fetch_array( $rssum, SQLSRV_FETCH_ASSOC) )
+			{
+				$tarifa=$rowsum["Tarifa"];
+			}
+
+?>
+
+			<section>
+				<article class="contract">
+					<h2>Contrato <?php echo $tarifa; ?></h2>
+					<h2>Periodo Tarifario Actual: <span><?php 
+					
+					if ($tarifa=="6.1 ATR   ")
+					{
+					echo periodo61(); 
+					}
+					if ($tarifa=="3.1 ATR   ")
+					{
+						
+					echo periodo31(); 
+					} ?></span></h2>
+				</article>
+				<!--<article class="period">
+					<span><?php  periodo61(); ?></span>
+				</article>-->
+			</section>
+				
+				
+			<section class="sectionsum">
+<?php             
+//echo "demo:".$_SESSION['demo'];
+		if ($_SESSION['demo']==0)
+		{
+$sql = "Select * from suministros where ".$consulta;
+
+		$rs = sqlsrv_query( $conn, $sql);
+		echo "<ul id='idcontract'>";
+while( $row = sqlsrv_fetch_array( $rs, SQLSRV_FETCH_ASSOC) )
+			{
+				echo "<a href='sucesos.php?id=".$row['id_suministro']."'><li class=''>";
+				echo "<p>".utf8_encode($row['alias'])."</p>";
+				echo "<p>".$row['cups']."</p>";
+				echo "</li></a>";
+			}
+}
+echo "</ul>";
+}
+if ($_SESSION['demo']==1)
+		{
+?>					<ul id="idcontract">
+					<a href="sucesos.php?id=2"><li class="">
+						<p>Suministro 1</p>
+						<p>CUPS: ES 4527 8710 9620 0011 PC</p>
+					</li></a>
+					<a href="sucesos.php?id=3"><li class="">
+						<p>Suministro 2</p>
+						<p>CUPS: ES 0081 2605 4682 1670 EM</p>
+					</li></a>
+					<a href="sucesos.php?id=4"><li class="">
+						<p>Suministro 3</p>
+						<p>CUPS: ES 0001 1274 3548 4430 DR</p>
+					</li></a>
+					<a class="gen" href="contadorgeneracion.php?id=7"><li class="">
+						<p>Generación</p>
+						<p>CUPS: ES 0023 0692 1911 2001 PD</p>
+					</li></a>
+				</ul>
+    			<!--</div>-->
+<?php } ?>
+			</section>
+			 <!--end marginuser-->
+		</article> <!--end usercontent-->
+
+
+		<div class="line"></div>
+		
+
+		<article id="eventscontent" class="content textcenter">
+			<div id="conect">
+				<article>
+					<p>Conectividad de los dispositivos: </p>
+					<p id="conectividad"></p>
+					<h5 id="mconectividad" class="hide disable"><span aria-hidden="true" class="icon-mail"></span>10 min</h5>
+				</article>
+			</div>
+
+			<section>
+				<!--article potencia-->
+				<article class="caja fleft">
+					<h2 class="h2caja">potencia</h2>
+					<section>
+						<article class="column1">
+							<div id="APIRelojSucesos"></div>
+						</article>
+						<article id="alarmaspotencia" style="padding-top:45px;" class="column2 alarmaspotencia">
+							<h1>Potencia contratada en este periodo: <span id="pcontratada">39</span>kW</h1>
+							<p>Tiempo de Alarma:</p>
+								<article id="m15potencia" class="disable">
+									<span aria-hidden="true" class="icon-mail"></span>
+									<h2 id="tiempopotencia">15 min</h2>
+								</article>
+
+							<section class="redlantern">
+								<div id="bpotencia" class="button fleft"></div>
+								<h4 id="hpotencia" class="fleft">00:00:00</h4>
+							</section>
+
+							<section id="umbralactivado" class="oculta">
+								<h1>Umbral activado a: <span id="pcontratada">-</span>kW</h1>
+								<p>Tiempo de Alarma:</p>
+									<article id="m1potencia" class="disable">
+										<span aria-hidden="true" class="icon-mail"></span>
+										<h2 id="tiempoumbral">15 min</h2>
+									</article>
+
+								<section class="redlantern">
+									<div id="bpotencia" class="button fleft"></div>
+									<h4 id="hpotencia" class="fleft">00:00:00</h4>
+								</section>
+							</section>
+
+							<section id="umbraldesactivado" class="oculta">
+								<h1>Umbral de potencia desactivado</h1>
+							</section>
+						</article>
+					</section>
+
+					<section>
+						<article class="column3">
+							<div id="APIGrafSucesos" class="oculta"></div>
+						</article>
+					</section>
+				</article><!--fin article potencia-->
+				
+				<!--article reactiva-->
+				<article class="caja fright">
+					<h2 class="h2caja">reactiva</h2>
+					<section>
+						<article class="column1">
+							<div id="reactivaReloj"></div>
+						</article>
+						<article id="alarmasreactiva" class="column2 alarmaspotencia">
+							<h1>Posible penalización con porcentaje superior del 33%</h1>
+							<p>Tiempo de Alarma:</p>
+								<article id="m15reactiva" class="disable">
+									<span aria-hidden="true" class="icon-mail"></span>
+									<h2 id="tiemporeactiva">1 h</h2>
+								</article>
+
+							<div class="redlantern">
+								<div id="breactiva" class="button fleft"></div>
+								<h4 id="hreactiva" class="fleft">00:00:00</h4>
+							</div>
+						</article>
+					</section>
+
+					<section>
+						<article class="column3">
+							<div id="reactivaGraf" class="oculta"></div>
+						</article>
+					</section>
+				</article><!--fin article reactiva-->
+			</section>
+
+
+
+			<section class="mtopcontent caja">
+				<!--article tension y texto-->
+				<h2 class="h2caja">tensión</h2>
+				<!--article relojes y contadores tension-->
+				<article id="tensiones">
+					
+					<section class="column1">
+						<article><h3>FASE 1</h3></article>
+						<article>
+							<div id="l1Reloj"></div>
+						</article>
+						<article class="datos">
+							<section><h5>Sobretensión</h5></section>
+							<section><div id="b2l1" class="button2"></div></section>
+							<section><h4 id="h2l1">00:00:00</h4></section>
+							<section><h5 id="m2l1" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL1sobre">15 min</span></h5>
+							</section>
+						</article>
+						<article class="datos">
+							<section><h5>Subtensión</h5></section>
+							<section><div id="b1l1" class="button2"></div></section>
+							<section><h4 id="h1l1">00:00:00</h4></section>
+							<section><h5 id="m1l1" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL1sub">15 min</span></h5>
+							</section>
+						</article>
+					</section>
+
+					<section class="column2">
+						<article><h3>FASE 2</h3></article>
+						<article>
+							<div id="l2Reloj"></div>
+						</article>
+						<article class="datos">
+							<section><h5>Sobretensión</h5></section>
+							<section><div id="b2l2" class="button2"></div></section>
+							<section><h4 id="h2l2">00:00:00</h4></section>
+							<section><h5 id="m2l2" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL2sobre">15 min</span></h5>
+							</section>
+						</article>
+						<article class="datos">
+							<section><h5>Subtensión</h5></section>
+							<section><div id="b1l2" class="button2"></div></section>
+							<section><h4 id="h1l2">00:00:00</h4></section>
+							<section><h5 id="m1l2" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL2sub">15 min</span></h5>
+							</section>
+						</article>
+					</section>
+
+					<section class="column3">
+						<article><h3>FASE 3</h3></article>
+						<article>
+							<div id="l3Reloj"></div>
+						</article>
+						<article class="datos">
+							<section><h5>Sobretensión</h5></section>
+							<section><div id="b2l3" class="button2"></div></section>
+							<section><h4 id="h2l3">00:00:00</h4></section>
+							<section><h5 id="m2l3" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL3sobre">15 min</span></h5>
+							</section>
+						</article>
+						<article class="datos">
+							<section><h5>Subtensión</h5></section>
+							<section><div id="b1l3" class="button2"></div></section>
+							<section><h4 id="h1l3">00:00:00</h4></section>
+							<section><h5 id="m1l3" class="disable">
+								<span aria-hidden="true" class="icon-mail"></span><span id="tiempoL3sub">15 min</span></h5>
+							</section>
+						</article>
+					</section>
+
+
+				</article>
+
+			</section>
+			
+			
+		</article> <!-- end eventscontent -->
+
+
+	</div> <!--end containercontent-->
+
+	<script>window.onload = setActive;</script>
+	<!--<script>window.onload = setSelected;</script>-->
+</body>
+</html>

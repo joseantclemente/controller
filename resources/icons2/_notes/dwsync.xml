@@ -4,4 +4,12 @@
 <file name="selection.json" server="192.168.5.40:23//" local="130554418383578315" remote="130553458800000000" Dst="2" />
 <file name="Read Me.txt" server="192.168.5.40:23//" local="130554418385508426" remote="130553458800000000" Dst="2" />
 <file name="style.css" server="192.168.5.40:23//" local="130554418387518541" remote="130553458800000000" Dst="2" />
+<file name="demo.html" server="192.168.5.40:23//app2/" local="130554418383388304" remote="130555129200000000" Dst="2" />
+<file name="Read Me.txt" server="192.168.5.40:23//app2/" local="130554418385508426" remote="130555129200000000" Dst="2" />
+<file name="selection.json" server="192.168.5.40:23//app2/" local="130554418383578315" remote="130555129200000000" Dst="2" />
+<file name="style.css" server="192.168.5.40:23//app2/" local="130554418387518541" remote="130555129200000000" Dst="2" />
+<file name="demo.html" server="192.168.5.40:23//app3/" local="130588857108244001" remote="130588825200000000" Dst="1" />
+<file name="selection.json" server="192.168.5.40:23//app3/" local="130588857110534132" remote="130588825200000000" Dst="1" />
+<file name="Read Me.txt" server="192.168.5.40:23//app3/" local="130588857112314234" remote="130588825200000000" Dst="1" />
+<file name="style.css" server="192.168.5.40:23//app3/" local="130588857112534247" remote="130588825200000000" Dst="1" />
 </dwsync>

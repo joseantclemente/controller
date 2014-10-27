@@ -2,4 +2,8 @@
 <dwsync>
 <file name="jquery.min.map" server="192.168.5.40:23//" local="130554418390158692" remote="130553282400000000" Dst="2" />
 <file name="jquery-1.9.0.min.js" server="192.168.5.40:23//" local="130554418390388705" remote="130553280000000000" Dst="2" />
+<file name="jquery-1.9.0.min.js" server="192.168.5.40:23//app2/" local="130554418390388705" remote="130555129200000000" Dst="2" />
+<file name="jquery.min.map" server="192.168.5.40:23//app2/" local="130554418390158692" remote="130555129200000000" Dst="2" />
+<file name="jquery-1.9.0.min.js" server="192.168.5.40:23//app3/" local="130588857114524361" remote="130588825200000000" Dst="1" />
+<file name="jquery.min.map" server="192.168.5.40:23//app3/" local="130588857114784375" remote="130588825200000000" Dst="1" />
 </dwsync>

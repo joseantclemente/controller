@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="index.php" server="192.168.5.40:23//" local="130555002574808235" remote="130554967200000000" Dst="2" />
-<file name="login.php" server="192.168.5.40:23//" local="130554418379178064" remote="130553398800000000" Dst="2" />
-<file name="seleccion.php" server="192.168.5.40:23//" local="130555002581358610" remote="130554958200000000" Dst="2" />
-<file name="verificar2.php" server="192.168.5.40:23//" local="130554418392478824" remote="130553383800000000" Dst="2" />
-<file name="index-copia.html" server="192.168.5.40:23//" local="130555002574778233" remote="130554999000000000" Dst="2" />
 <file name="index.html" server="192.168.5.40:23//" local="130555002574808235" remote="130555001400000000" Dst="2" />
-<file name="seleccion.html" server="192.168.5.40:23//" local="130555105443744635" remote="130555105200000000" Dst="2" />
-<file name="indexcopia.html" server="192.168.5.40:23//" local="130555089904915865" remote="130555089600000000" Dst="2" />
-<file name="pruebas.html" server="192.168.5.40:23//" local="130555089296191048" remote="130555089000000000" Dst="2" />
+<file name="contador.html" server="192.168.5.40:23//app2/" local="130555927617373737" remote="130555927200000000" Dst="2" />
+<file name=".gitattributes" server="192.168.5.40:23//app2/" local="130540406209146362" remote="130555129200000000" Dst="2" />
+<file name="index.html" server="192.168.5.40:23//app2/" local="130555141319036585" remote="130555141200000000" Dst="2" />
+<file name="sucesos.html" server="192.168.5.40:23//app2/" local="130555926181651619" remote="130555926000000000" Dst="2" />
+<file name="index.html" server="192.168.5.40:23//app/" local="130586061012773417" remote="130555006800000000" Dst="2" />
+<file name="index.html" server="192.168.5.40:23//app3/" local="130588857104013759" remote="130588825200000000" Dst="1" />
+<file name="consumo.html" server="192.168.5.40:23//app3/" local="130586073689458482" remote="130585497000000000" Dst="2" />
+<file name="contador.html" server="192.168.5.40:23//app3/" local="130588857096913353" remote="130588825200000000" Dst="1" />
+<file name="sucesos.html" server="192.168.5.40:23//app3/" local="130588857112934270" remote="130588825200000000" Dst="1" />
+<file name="suministros.html" server="192.168.5.40:23//app3/" local="130588857112904268" remote="130588855800000000" Dst="1" />
+<file name="graficacris.html" server="192.168.5.40:23//app3/" local="130586218871882442" remote="130586218200000000" Dst="2" />
+<file name="grafica.html" server="192.168.5.40:23//app3/" local="130588857098853464" remote="130588852800000000" Dst="1" />
+<file name=".gitattributes" server="192.168.5.40:23//app3/" local="130588857098593449" remote="130588825200000000" Dst="1" />
+<file name="login.html" server="192.168.5.40:23//app3/" local="130588857107313948" remote="130588825200000000" Dst="1" />
+<file name="pruebas.html" server="192.168.5.40:23//app3/" local="130588857107593964" remote="130588825200000000" Dst="1" />
+<file name="verificar.php" server="192.168.5.40:23//app3/" local="130588857116584478" remote="130588825200000000" Dst="1" />
 </dwsync>

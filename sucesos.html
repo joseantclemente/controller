@@ -1,0 +1,182 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+	<title>Controller Energético</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/style.css" media="screen, print"/>
+	<link rel="stylesheet"  href="styles/jquerymobile.css" media="screen, print"/>
+    
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+ 	<script type="text/javascript" src="js/js.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>    
+	<script src="//code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
+	<!--Funciones para graficos de los sucesos-->
+ 	<script type="text/javascript" src="http://controllerenergetico.dyndns.org:8081/funciones/sucesosapp.js"></script>
+	<script src="http://controllerenergetico.dyndns.org:8081/funciones/graficos.js"></script>
+	<script src="http://controllerenergetico.dyndns.org:8081/funciones/graficos2.js"></script>
+
+ 	
+    <!--Primera funcion llamada al cargar pagina-->
+    <script> 
+   		function llamada(){
+			setActive();
+			cargarhist();	
+		}
+    
+    
+	<!--Activar el icono activo actualmente-->
+	
+		function setActive() {
+			aObj = document.getElementById('navegador').getElementsByTagName('a');
+			spanObj = document.getElementById('navegador').getElementsByTagName('span');
+			
+			for(i=0;i<aObj.length;i++) {
+				if(i==2) {
+					spanObj[i].style.color='#3498DB';
+				}
+			}
+		}
+    </script>
+    
+ 
+ 	<!--Funcion para añadir parametro con id despues del enlace-->
+	<script type="text/javascript">
+		function ides(sParam)
+		{
+			var sPageURL = window.location.search.substring(1);
+			var sURLVariables = sPageURL.split('&');
+			
+			for (var i = 0; i < sURLVariables.length; i++) 
+			{
+				var sParameterName = sURLVariables[i].split('=');
+				if (sParameterName[0] == sParam) 
+				{
+					return sParameterName[1];
+				}
+			}
+		}
+		var ide=ides('id');
+		
+    
+		function redirigir(pagina)
+		{
+			window.location=pagina+"?id="+ide;
+		}
+    </script>
+    
+    
+    
+    <!--cargar primeros datos en TReal-->
+    <script type="text/javascript">
+    	setInterval(function() {
+			$.getJSON("http://controllerenergetico.dyndns.org:8081/conexiones/treal3inicio.php?id="+ide, function(data, textStatus){
+				document.getElementById('suministro').innerHTML = data.Poblacion;
+			});
+		}, 1000);
+	</script>
+    
+    
+    <script>
+		var tabla="";
+		
+		function cargarhist()
+		{
+			
+			tabla+="";
+			
+			$.ajax({
+				url: 'http://controllerenergetico.dyndns.org:8081/conexiones/apphistorial.php?idsum='+ide,
+				type: 'GET',
+
+				success: function (response) {
+					tabla+=response.tabla;
+					document.getElementById("tablahist").innerHTML = tabla;
+				},
+			});
+		}
+	</script>
+    
+</head>
+
+
+
+<body>
+	<header class="gen">
+    	<div>
+            <div class="sup">
+                <div class="fleft"><a href="index.html">Salir</a></div>
+                <div class="fleft"><p class="tcenter">Suministro: <span id="suministro">-</span></p></div>
+                <div class="fleft"><a href="#" onClick="redirigir('suministros.html');"><span aria-hidden="true" class="icon-search"></span></a></div>
+            </div>
+            
+            <nav id="navegador">
+                <ul>
+                    <li><a href="#" onClick="redirigir('contador.html');"><span aria-hidden="true" class="icon-screen"></span></a></li>
+                    <li><a href="#" onClick="redirigir('grafica.html');"><span aria-hidden="true" class="icon-gauge"></span></a></li>
+                    <li><a href="#" onClick="redirigir('sucesos.html');"><span aria-hidden="true" class="icon-uniE600"></span></a></li>
+                </ul>
+            </nav>
+		</div>   
+	</header>
+    
+    
+    
+    <div class="container">
+    	<h1 class="raleway fleft">Historial de Alarmas</h1>
+        <!--<p class="alarma">-->
+        <ul class="ulhist fleft" id="tablahist">
+        	<!--<li>
+                <div class="fleft">
+                	
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>
+            <li>
+                <div class="fleft">
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>
+            <li>
+                <div class="fleft">
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>
+            <li>
+                <div class="fleft">
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>
+            <li>
+                <div class="fleft">
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>
+            <li>
+                <div class="fleft">
+                    <p><span aria-hidden="true" class="icon-notification"></span>Exceso de Reactiva</p>
+                    <p>Hora de alarma: <span id="hora1">11/09/14  11:14</span></p>
+                    <p>Se ha detectado un coseno de phi de menos de 0.95 durante más de 30 minutos. Este suceso puede incurrir en excesos de reactiva.</p>
+                </div>
+            </li>-->
+        </ul>
+    </div>
+    
+    
+    <script>window.onload = llamada;</script>
+
+</body>
+</html>

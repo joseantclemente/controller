@@ -11,75 +11,92 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/js.js"></script>
 
+	<script>
+		function login()
+		{
+			var iuser = document.getElementById("usuario");
+			var ipass = document.getElementById("contra");
+			var user = document.getElementById("usuario").value;
+			var pass = document.getElementById("contra").value;
+
+			if(user=="" || user==null)
+			{
+				document.getElementById("msglogin").setAttribute("class", "muestra");
+				document.getElementById("msglogin").innerHTML = "<p>Introduzca su nombre de usuario.</p>";
+				
+				iuser.className.replace("text_area","");// primero eliminamos la clase que exista ya
+				iuser.setAttribute("class", "text_area error"); //Para la mayoria de los navegadores
+				iuser.setAttribute("className", "text_area error"); //Para IE*/
+				iuser.focus();
+				
+				ipass.setAttribute("class", "text_area"); //Para la mayoria de los navegadores
+				ipass.setAttribute("className", "text_area"); //Para IE
+			}
+			else if(pass=="" || pass==null)
+			{
+				document.getElementById("msglogin").setAttribute("class", "muestra");
+				document.getElementById("msglogin").innerHTML = "<p>Introduzca su contraseña.</p>";
+								
+				ipass.className.replace("text_area","");// primero eliminamos la clase que exista ya
+				ipass.setAttribute("class", "text_area error"); //Para la mayoria de los navegadores
+				ipass.setAttribute("className", "text_area error"); //Para IE
+				ipass.focus();
+				
+				iuser.setAttribute("class", "text_area"); //Para la mayoria de los navegadores
+				iuser.setAttribute("className", "text_area"); //Para IE
+			}
+			else
+			{
+				$.ajax({
+					url: './verificar.php?user='+user+'&pass='+pass,
+					type: 'GET',
+
+					success: function (response) {
+						if(response.correcto=="OK")
+						{
+							document.getElementById("msglogin").innerHTML = "";
+							window.location=response.enlace;
+							//Redirigimos a la direccion almacenada en reponse.enlace
+						}
+						else if(response.correcto=="NO")
+						{
+							if (response.respuesta=="datos")
+							{
+								document.getElementById("msglogin").setAttribute("class", "muestra");
+								document.getElementById("msglogin").innerHTML = "<p>Usuario o contraseña incorrectos.</p>";
+								iuser.focus();
+								
+								iuser.className.replace("text_area","");// primero eliminamos la clase que exista ya
+								iuser.setAttribute("class", "text_area error"); //Para la mayoria de los navegadores
+								iuser.setAttribute("className", "text_area error"); //Para IE*/
+							
+								ipass.setAttribute("class", "text_area"); //Para la mayoria de los navegadores
+								ipass.setAttribute("className", "text_area"); //Para IE
+								
+								
+							}else if(response.respuesta=="conexion"){
+								document.getElementById("msglogin").setAttribute("class", "muestra");
+								document.getElementById("msglogin").innerHTML = "<p>Error al establecer conexión.</p>";
+								ipass.focus();
+								
+								ipass.className.replace("text_area","");// primero eliminamos la clase que exista ya
+								ipass.setAttribute("class", "text_area error"); //Para la mayoria de los navegadores
+								ipass.setAttribute("className", "text_area error"); //Para IE
+								
+								iuser.setAttribute("class", "text_area"); //Para la mayoria de los navegadores
+								iuser.setAttribute("className", "text_area"); //Para IE
+							}
+						}
+					},
+
+				});
+			}
+		}
+	</script>
+    
     
     <script>
 		$(document).ready(function() {
-			
-			$("#loginbtn").click(function(){				
-				var iuser = $('#usuario');
-				var ipass = $('#contra');
-				var user = $('#usuario').val();
-				var pass = $('#contra').val();
-				
-				if(user=='' || user==null){
-					$( "#msglogin" ).removeClass( "oculta" ).addClass( "muestra" );
-					$( "#msglogin" ).html( "<p>Introduzca su nombre de usuario.</p>" );
-					
-					iuser.addClass( "error" );
-					iuser.focus();
-					ipass.addClass( "text_area" );
-				}else if(pass=='' || pass==null){
-					$( "#msglogin" ).removeClass( "oculta" ).addClass( "muestra" );
-					$( "#msglogin" ).html( "<p>Introduzca su contraseña.</p>" );
-					
-					ipass.addClass( "error" );
-					ipass.focus();
-					iuser.addClass( "text_area" );
-					
-				}
-				else
-				{
-					var dataString = 'user='+ user + '&pass='+ pass;
-					$.ajax({
-						type: "POST",
-						url: './verificar.php',
-						data: dataString,
-						cache: false,
-						success: function(response){
-							if(response.correcto=="OK")
-							{
-								$( "#msglogin" ).html( "" );
-								$(location).attr('href',response.enlace);
-							}
-							else if(response.correcto=="NO")
-							{
-								if (response.respuesta=="datos")
-								{
-									$( "#msglogin" ).removeClass( "oculta" ).addClass( "muestra" );
-									$( "#msglogin" ).html( "<p>Usuario o contraseña incorrectos.</p>" );
-									iuser.focus();
-									iuser.addClass( "error" );
-									ipass.addClass( "text_area" );
-									
-								}else if(response.respuesta=="conexion"){
-									$( "#msglogin" ).removeClass( "oculta" ).addClass( "muestra" );
-									$( "#msglogin" ).html( "<p>Error al establecer conexión.</p>" );
-									ipass.focus();
-									ipass.addClass( "error" );
-									iuser.addClass( "text_area" );
-								}
-							}					
-						
-						}
-					});
-				}
-			});
-			
-			
-			
-			
-			
-			
 			var first = true;
 	
 			// Hide menu once we know its width
@@ -258,7 +275,7 @@
 	<header class="login">
         <div id="logo">
             <ul>
-                <li><a href="#"><img src="http://controllerenergetico.dyndns.org:8081/app3/images/logonucompleto.png" alt="Logotipo"></a></li>
+                <li><a href="#"><img src="images/logonucompleto.png" alt="Logotipo"></a></li>
             </ul>
         </div>
     </header>
@@ -274,12 +291,12 @@
                         <div class="centrar">
                             <div id="msglogin" class="oculta"><p class="hide"></p></div>
                         </div>
-                        <form id="target" name="formlogin" class="formlogin" method="get" novalidate>
+                        <form id="formlogin" name="formlogin" method="get" novalidate action="javascript:login();">
                             <div>
                                 <input type="text" class="text_area" name="usuario" id="usuario" placeholder="Usuario" value="" autofocus/>
                                 <input type="password" class="text_area" name="contra" id="contra" placeholder="Contraseña" value="" />
-                                <input type="button" id="loginbtn" class="fright submit_btn raleway" value="Entrar" />
-                                <!--<input type="button" id="daralta" class="fleft raleway" value="Dar de Alta">-->
+                                <input type="submit" class="fright submit_btn raleway" value="Entrar" />
+                                <input type="button" id="daralta" class="fleft raleway" value="Dar de Alta">
                                 
                             </div>
                         </form>
@@ -308,7 +325,7 @@
     <script src="vendor/jquery-1.9.0.min.js"></script>
 	<script src="js/jquery-validate.js"></script>
 	<script>
-		$('#ajax-contact-form').validate({
+		$('form').validate({
 			// Specify the validation rules
 			rules: {
 				email: {
